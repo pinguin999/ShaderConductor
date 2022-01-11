@@ -224,7 +224,7 @@ if __name__ == "__main__":
 		hostArch = "x64"
 	elif (hostArch == "i386"):
 		hostArch = "x86"
-	elif (hostArch == "ARM64"):
+	elif (hostArch.lower() == "arm64"):
 		hostArch = "arm64"
 	else:
 		LogError("Unknown host architecture %s.\n" % hostArch)
@@ -262,5 +262,6 @@ if __name__ == "__main__":
 		# Cross compiling:
 		# Generate a project with host architecture, build clang-tblgen and llvm-tblgen, and keep the path of clang-tblgen and llvm-tblgen
 		tblgenPath = Build(hostPlatform, hostArch, buildSys, compiler, hostArch, configuration, True, None)
+		Build(hostPlatform, hostArch, buildSys, compiler, hostArch, configuration, False, tblgenPath)
 
 	Build(hostPlatform, hostArch, buildSys, compiler, arch, configuration, False, tblgenPath)
